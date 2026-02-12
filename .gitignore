@@ -1,0 +1,10 @@
+**/.env
+**/.adk
+payload.json
+
+.idea/
+*.iml
+
+.venv/
+**/__pycache__/
+*.pyc
