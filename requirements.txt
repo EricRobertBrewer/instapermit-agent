@@ -1,5 +1,6 @@
 google-adk==1.25.0
 google-genai==1.63.0
+litellm==1.81.11
 mcp==1.26.0
 protobuf==6.33.5
 python-dotenv==1.2.1

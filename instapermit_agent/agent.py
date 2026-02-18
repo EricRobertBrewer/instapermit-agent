@@ -2,11 +2,15 @@ import os
 
 import dotenv
 from google.adk.agents import LlmAgent
-from google.adk.models.google_llm import Gemini
+from google.adk.models.lite_llm import LiteLlm
 from google.adk.tools.mcp_tool import McpToolset, StdioConnectionParams
 from mcp import StdioServerParameters
 
 dotenv.load_dotenv()
+
+KEY_OPENROUTER = 'OPENROUTER_API_KEY_RPA_AGENT'
+if KEY_OPENROUTER not in os.environ:
+    raise KeyError(f'Environment variable `{KEY_OPENROUTER}` not found. Add the API key to the `.env` file.')
 
 KEY_USERNAME = 'AHJ_CREDENTIAL_USERNAME'
 KEY_PASSWORD = 'AHJ_CREDENTIAL_PASSWORD'
@@ -51,9 +55,10 @@ to remediate those errors.
 root_agent = LlmAgent(
     name='root_agent',
     description='An agent to submit and retrieve solar permits within websites for various AHJs.',
-    model=Gemini(
-        model='gemini-3-flash-preview',
-        use_interactions_api=False
+    model=LiteLlm(
+        model='openrouter/moonshotai/kimi-k2.5',
+        api_key=os.environ[KEY_OPENROUTER],
+        api_base='https://openrouter.ai/api/v1'
     ),
     instruction='Walk through a permit submittal.',
     static_instruction=ROOT_STATIC_INSTRUCTION,
