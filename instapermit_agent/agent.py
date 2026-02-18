@@ -45,11 +45,7 @@ to remediate those errors.
 ## Rules
 
 - Use a Chrome browser by default.
-- In general, while browsing, you shouldn't have to execute JavaScript code to
-  proceed in a form. For example, if clicking a checkbox element doesn't work,
-  try clicking an adjacent label element - especially one with matching text -
-  before resorting to executing code.
-- Form fields are provided in the file `payload.json`.
+- Values for form fields are provided in the file `payload.json`.
 """
 
 root_agent = LlmAgent(
@@ -59,7 +55,7 @@ root_agent = LlmAgent(
         model='gemini-3-flash-preview',
         use_interactions_api=False
     ),
-    instruction='Just use the environment variables.',
+    instruction='Walk through a permit submittal.',
     static_instruction=ROOT_STATIC_INSTRUCTION,
     tools=[
         get_login_credentials,
